@@ -21,7 +21,7 @@ public class WordCountModelTest {
 
         // Check if the fields are correctly initialized
         assertEquals(URL, wordCountModel.getURL());
-        assertEquals(totalNumberWord, wordCountModel.getTotalNumberWord());
+        assertEquals(totalNumberWord, wordCountModel.getWordcount());
         assertEquals(averageWordLength, wordCountModel.getAverageWordLength());
         assertEquals(mostFrequentWord, wordCountModel.getMostFrequentWord());
         assertEquals(listNumberWordEach, wordCountModel.getListNumberWordEach());

@@ -3,7 +3,8 @@ package com.aleman.model;
 public class WordCountModel {
 
     private String URL;
-    private String totalNumberWord;
+
+    private String wordcount;
     private String averageWordLength;
     private String mostFrequentWord;
     private String listNumberWordEach;
@@ -18,12 +19,12 @@ public class WordCountModel {
         this.URL = URL;
     }
 
-    public String getTotalNumberWord() {
-        return totalNumberWord;
+    public String getWordcount() {
+        return wordcount;
     }
 
-    public void setTotalNumberWord(String totalNumberWord) {
-        this.totalNumberWord = totalNumberWord;
+    public void setWordcount(String wordcount) {
+        this.wordcount = wordcount;
     }
 
     public String getAverageWordLength() {
@@ -50,9 +51,9 @@ public class WordCountModel {
         this.listNumberWordEach = listNumberWordEach;
     }
 
-    public WordCountModel(String URL, String totalNumberWord, String averageWordLength, String mostFrequentWord, String listNumberWordEach) {
+    public WordCountModel(String URL, String wordcount, String averageWordLength, String mostFrequentWord, String listNumberWordEach) {
         this.URL = URL;
-        this.totalNumberWord = totalNumberWord;
+        this.wordcount = wordcount;
         this.averageWordLength = averageWordLength;
         this.mostFrequentWord = mostFrequentWord;
         this.listNumberWordEach = listNumberWordEach;
