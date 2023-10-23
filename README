@@ -1,0 +1,8 @@
+How to use
+
+Use a Postman/Soap UI , deploy in your server
+
+http://{LOCALHOST_ENDPOINT:PORT}/wordcount/?url=https://file
+
+As an example in my local:
+http://localhost:8080/wordcount/?url=https://janelwashere.com/files/bible_daily.txt
