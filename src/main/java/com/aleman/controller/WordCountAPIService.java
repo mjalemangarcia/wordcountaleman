@@ -38,8 +38,7 @@ public class WordCountAPIService {
         System.out.println("Count word =" + wordCountModel.getWordcount());
         System.out.println("Average word length =" + wordCountModel.getAverageWordLength());
         numberOfWordsOfLength.printNumberOfWordsOfLength(wordCountModel.getListNumberWordEach());
-        mostFrequentWord.printMostFrequentWord(wordCountModel.getMostFrequentWord());
-        return new WordCountModel(url,wordCountModel.getWordcount(), wordCountModel.getAverageWordLength(), wordCountModel.getMostFrequentWord(),wordCountModel.getListNumberWordEach());
+        return new WordCountModel(url,wordCountModel.getWordcount(), wordCountModel.getAverageWordLength(),mostFrequentWord.printMostFrequentWord(wordCountModel.getMostFrequentWord()),wordCountModel.getListNumberWordEach());
     }
 
 

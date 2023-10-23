@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Component
 public class MostFrequentWord {
 
-    public void  printMostFrequentWord(ConcurrentHashMap<Integer,Integer> listNumberWordEach ){
+    public ConcurrentHashMap<Integer,Integer>  printMostFrequentWord(ConcurrentHashMap<Integer,Integer> listNumberWordEach ){
 
         //stream Lambda
         ConcurrentHashMap<Integer,Integer> mostFreqWord = new ConcurrentHashMap<>();
@@ -22,5 +22,6 @@ public class MostFrequentWord {
         for(Integer element : mostFreqWord.keySet()){
             System.out.println(", for word lengths of  " +element);
         }
+        return mostFreqWord;
     }
 }
