@@ -1,6 +1,7 @@
 package com.aleman.controller;
 
 import com.aleman.model.WordCountModel;
+import com.aleman.service.ReadFileService;
 import com.aleman.util.MostFrequentWord;
 import com.aleman.util.NumberOfWordsOfLength;
 import com.aleman.service.ReadFromUrlImpl;
@@ -22,11 +23,17 @@ public class WordCountAPIService {
 
     @Autowired
     private MostFrequentWord mostFrequentWord;
+
+    @Autowired
+    ReadFromUrlImpl readFromUrl;
+
+    @Autowired
+    ReadFileService readFileService;
+
     @GetMapping("/")
     public WordCountModel getAlemanwordcount(@RequestParam String url) {
 
-        ReadFromUrlImpl readFromUrlService = new ReadFromUrlImpl(wordCountModel);
-        readFromUrlService.getReadFile(url);
+        readFileService.getReadFile(url);
         System.out.println("===PRINT");
         System.out.println("Count word =" + wordCountModel.getWordcount());
         System.out.println("Average word length =" + wordCountModel.getAverageWordLength());
