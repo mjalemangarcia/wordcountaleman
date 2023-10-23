@@ -86,6 +86,7 @@ public class ReadFromUrlImpl implements ReadFileService {
 
         } catch (IOException e) {
             System.out.println(e);
+            return new ConcurrentHashMap<>();
         }
 
         wordCountModel.setMostFrequentWord(listNumberWordEach);

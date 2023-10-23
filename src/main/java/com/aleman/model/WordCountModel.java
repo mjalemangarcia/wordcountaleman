@@ -1,10 +1,6 @@
 package com.aleman.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -18,6 +14,7 @@ public class WordCountModel {
     //hash key , it cannot be repeated. Important
     private ConcurrentHashMap<Integer, Integer> mostFrequentWord = new ConcurrentHashMap<>();
     private ConcurrentHashMap<Integer,Integer>  listNumberWordEach = new ConcurrentHashMap<>();
+
 
     public String getURL() {
         return URL;
@@ -61,6 +58,9 @@ public class WordCountModel {
 
     //Constructor
     public WordCountModel(String s, int i, double v, String s1, String s2, String s3) {
+    }
+
+    public WordCountModel(String testURL, double v, ConcurrentHashMap<Integer, Integer> mf, ConcurrentHashMap<Integer, Integer> lnw) {
     }
 
 
