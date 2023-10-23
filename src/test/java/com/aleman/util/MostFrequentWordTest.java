@@ -1,6 +1,7 @@
 package com.aleman.util;
 
 import com.aleman.model.WordCountModel;
+import com.aleman.service.ReadFromUrlImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -29,7 +30,7 @@ public class MostFrequentWordTest {
     @BeforeEach
     public void setup() {
         System.setOut(new PrintStream(outputStreamCaptor));
-        ReadFromUrlService readFromUrlService = new ReadFromUrlService(wordCountModel);
+        ReadFromUrlImpl readFromUrlService = new ReadFromUrlImpl(wordCountModel);
     }
 
     @Test

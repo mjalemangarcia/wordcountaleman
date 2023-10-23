@@ -1,4 +1,4 @@
-package com.aleman.util;
+package com.aleman.service;
 
 import com.aleman.model.WordCountModel;
 import com.aleman.model.WordModel;
@@ -12,15 +12,15 @@ import java.net.URL;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-public class ReadFromUrlService {
+public class ReadFromUrlImpl implements ReadFileService {
 
     private WordCountModel wordCountModel;
 
     @Autowired
-    public ReadFromUrlService(WordCountModel wordCountModel) {
+    public ReadFromUrlImpl(WordCountModel wordCountModel) {
         this.wordCountModel = wordCountModel;
     }
-    public ConcurrentHashMap<String, WordModel> getReadFromUrl(String url) {
+    public ConcurrentHashMap<String, WordModel> getReadFile(String url) {
 
         int countWord = 0;
         double sum = 0;

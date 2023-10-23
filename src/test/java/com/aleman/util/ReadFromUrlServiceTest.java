@@ -1,6 +1,7 @@
 package com.aleman.util;
 
 import com.aleman.model.WordCountModel;
+import com.aleman.service.ReadFromUrlImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
 
@@ -22,7 +23,7 @@ public class ReadFromUrlServiceTest {
     @BeforeEach
     public void setup() {
         System.setOut(new PrintStream(outputStreamCaptor));
-        ReadFromUrlService readFromUrlService = new ReadFromUrlService(wordCountModel);
+        ReadFromUrlImpl readFromUrlService = new ReadFromUrlImpl(wordCountModel);
     }
 
     private void getReadFromUrlTest() {
