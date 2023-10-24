@@ -1,15 +1,16 @@
 package com.aleman.controller;
 
 import com.aleman.model.WordCountModel;
+import com.aleman.model.WordModel;
 import com.aleman.service.ReadFileService;
 import com.aleman.util.MostFrequentWord;
-import com.aleman.util.NumberOfWordsOfLength;
-import com.aleman.service.ReadFromUrlImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 @RequestMapping("/wordcount")
@@ -19,13 +20,7 @@ public class WordCountAPIService {
     private WordCountModel wordCountModel;
 
     @Autowired
-    private NumberOfWordsOfLength numberOfWordsOfLength;
-
-    @Autowired
     private MostFrequentWord mostFrequentWord;
-
-    @Autowired
-    ReadFromUrlImpl readFromUrl;
 
     @Autowired
     ReadFileService readFileService;
@@ -33,11 +28,13 @@ public class WordCountAPIService {
     @GetMapping("/")
     public WordCountModel getAlemanwordcount(@RequestParam String url) {
 
-        readFileService.getReadFile(url);
+        ConcurrentHashMap<String, WordModel> wordReadModel = new ConcurrentHashMap<>();
+
+        wordReadModel = readFileService.getReadFile(url);
+
         System.out.println("===PRINT");
-        System.out.println("Count word =" + wordCountModel.getWordcount());
+        System.out.println("Count word =" + wordReadModel.size());
         System.out.println("Average word length =" + wordCountModel.getAverageWordLength());
-        numberOfWordsOfLength.printNumberOfWordsOfLength(wordCountModel.getListNumberWordEach());
         return new WordCountModel(url,wordCountModel.getWordcount(), wordCountModel.getAverageWordLength(),mostFrequentWord.printMostFrequentWord(wordCountModel.getMostFrequentWord()),wordCountModel.getListNumberWordEach());
     }
 

@@ -22,6 +22,11 @@ public class MostFrequentWord {
         for(Integer element : mostFreqWord.keySet()){
             System.out.println(", for word lengths of  " +element);
         }
+
+        for(Integer element : listNumberWordEach.keySet()){
+            System.out.println("Number of words of length "+ element + " is " +listNumberWordEach.get(element));
+        }
+
         return mostFreqWord;
     }
 }

@@ -1,27 +1,42 @@
 package com.aleman.controller;
 
 import com.aleman.model.WordCountModel;
+import com.aleman.model.WordModel;
+import com.aleman.service.ReadFileService;
+import com.aleman.util.MostFrequentWord;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.util.concurrent.ConcurrentHashMap;
+
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @WebMvcTest
 public class WordCountAPIServiceTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+    @InjectMocks
+    private WordCountAPIService wordCountAPIService;
 
-    @Mock
+    @MockBean
     WordCountModel wordCountModel;
+
+    @MockBean
+    MostFrequentWord mostFrequentWord;
+
+    @MockBean
+    ReadFileService readFileService;
 
     @BeforeEach
     public void setup() {
@@ -29,19 +44,39 @@ public class WordCountAPIServiceTest {
     }
     @Test
     public void testGetAlemanwordcount() throws Exception {
-        String url = "example.com";
-        int wordcountReturn =100;
+        String url = "test.com";
         double averageWordLengthReturn = 5.2;
-        when(wordCountModel.getWordcount()).thenReturn(wordcountReturn);
-        when(wordCountModel.getAverageWordLength()).thenReturn(averageWordLengthReturn);
+        ConcurrentHashMap<Integer,Integer> listNumberWordEach = new ConcurrentHashMap<>();
+        listNumberWordEach.put(1,1);
+        listNumberWordEach.put(2,2);
+        listNumberWordEach.put(3,2);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/")
-                        .param("url", url))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.URL", is(url) ))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.totalNumberWord", is(wordcountReturn)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.averageWordLength", is(averageWordLengthReturn)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.mostFrequentWord", is("getMostFrequentWord")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.listNumberWordEach", is("getListNumberWordEach")));
+        ConcurrentHashMap<String, WordModel> mockResult = new ConcurrentHashMap<>();
+        mockResult.put("Hello", new WordModel(5,1));
+        mockResult.put("world", new WordModel(5,1));
+        mockResult.put("&", new WordModel(1,1));
+        mockResult.put("good", new WordModel(5,1));
+        mockResult.put("morning", new WordModel(7,1));
+        mockResult.put("The", new WordModel(3,1));
+        mockResult.put("is", new WordModel(2,1));
+        mockResult.put("18/05/2016", new WordModel(10,1));
+
+        ConcurrentHashMap<Integer,Integer> mostFreqWord = new ConcurrentHashMap<>();
+        mostFreqWord.put(2,2);
+        when(readFileService.getReadFile(url)).thenReturn(mockResult);
+        when(mostFrequentWord.printMostFrequentWord(listNumberWordEach)).thenReturn(mostFreqWord);
+        when(wordCountModel.getWordcount()).thenReturn(mockResult.size());
+        when(wordCountModel.getAverageWordLength()).thenReturn(averageWordLengthReturn);
+        when(wordCountModel.getMostFrequentWord()).thenReturn(mostFreqWord);
+        when(wordCountModel.getListNumberWordEach()).thenReturn(listNumberWordEach);
+
+        WordCountModel result = wordCountAPIService.getAlemanwordcount(url);
+
+        // Then
+        assertEquals(url, result.getURL().toString());
+        assertEquals(8, result.getWordcount());
+        assertEquals(5.2, result.getAverageWordLength());
+        assertEquals(listNumberWordEach, result.getListNumberWordEach());
+
     }
 }

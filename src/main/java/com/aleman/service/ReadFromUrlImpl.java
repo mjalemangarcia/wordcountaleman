@@ -26,7 +26,6 @@ public class ReadFromUrlImpl implements ReadFileService {
         double sum = 0;
         double averageWordLength = 0;
 
-
         ConcurrentHashMap<String, WordModel> wordLength = new ConcurrentHashMap<>();
         ConcurrentHashMap<Integer,Integer> listNumberWordEach =  new ConcurrentHashMap<>();
 

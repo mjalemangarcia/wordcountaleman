@@ -47,7 +47,15 @@ public class MostFrequentWordTest {
                 ", for word lengths of  2" +
                 System.lineSeparator() +
                 ", for word lengths of  3" +
-                System.lineSeparator();
+                System.lineSeparator() +
+                "Number of words of length 1 is 1" +
+                System.lineSeparator() +
+                "Number of words of length 2 is 2" +
+                System.lineSeparator() +
+                "Number of words of length 3 is 2" +
+                System.lineSeparator();;
+
+
         assertEquals(expectedOutput, outputStreamCaptor.toString());
 
     }
