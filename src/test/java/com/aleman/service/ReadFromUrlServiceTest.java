@@ -1,5 +1,6 @@
 package com.aleman.service;
 import com.aleman.model.WordModel;
+import com.aleman.util.DsaUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -19,17 +20,9 @@ public class ReadFromUrlServiceTest {
     public void getReadFromUrlTest() {
         String testUrl = "http://example.com";
 
-        ConcurrentHashMap<String, WordModel> mockResult = new ConcurrentHashMap<>();
-        mockResult.put("Hello", new WordModel(5,1));
-        mockResult.put("world", new WordModel(5,1));
-        mockResult.put("&", new WordModel(1,1));
-        mockResult.put("good", new WordModel(5,1));
-        mockResult.put("morning", new WordModel(7,1));
-        mockResult.put("The", new WordModel(3,1));
-        mockResult.put("is", new WordModel(2,1));
-        mockResult.put("18/05/2016", new WordModel(10,1));
+        ConcurrentHashMap<String, WordModel> wordModelConcurrentHashMap = DsaUtils.wordModelConcurrentHashMap();
 
-        when(readFileService.getReadFile(testUrl)).thenReturn(mockResult);
+        when(readFileService.getReadFile(testUrl)).thenReturn(wordModelConcurrentHashMap);
 
         ConcurrentHashMap<String, WordModel> result = readFileService.getReadFile(testUrl);
 

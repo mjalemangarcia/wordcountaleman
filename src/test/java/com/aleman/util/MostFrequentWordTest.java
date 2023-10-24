@@ -36,10 +36,7 @@ public class MostFrequentWordTest {
     @Test
     public void getMostFrequentWordTest() {
         MostFrequentWord mostFrequentWord1 = new MostFrequentWord();
-        ConcurrentHashMap <Integer,Integer>  listNumberWordEach = new ConcurrentHashMap<>();
-        listNumberWordEach.put(1,1);
-        listNumberWordEach.put(2,2);
-        listNumberWordEach.put(3,2);
+        ConcurrentHashMap<Integer,Integer> listNumberWordEach = DsaUtils.listNumberWordEach();
         mostFrequentWord1.printMostFrequentWord(listNumberWordEach);
 
         String expectedOutput = "The most frequently occuring word length is  2" +
@@ -54,7 +51,6 @@ public class MostFrequentWordTest {
                 System.lineSeparator() +
                 "Number of words of length 3 is 2" +
                 System.lineSeparator();;
-
 
         assertEquals(expectedOutput, outputStreamCaptor.toString());
 

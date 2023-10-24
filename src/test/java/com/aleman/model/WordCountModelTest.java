@@ -1,5 +1,6 @@
 package com.aleman.model;
 
+import com.aleman.util.DsaUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -19,14 +20,9 @@ public class WordCountModelTest {
         String URL = "example.com";
         int wordcount = 100;
         double averageWordLength = 5.2;
-
-        ConcurrentHashMap <Integer,Integer> mostFrequentWord = new ConcurrentHashMap<>();
-        mostFrequentWord.put(1,3);
-        mostFrequentWord.put(2,4);
-        ConcurrentHashMap <Integer,Integer>  listNumberWordEach = new ConcurrentHashMap<>();
-        listNumberWordEach.put(1,1);
-        listNumberWordEach.put(2,2);
-        listNumberWordEach.put(3,2);
+        
+        ConcurrentHashMap<Integer,Integer> listNumberWordEach = DsaUtils.listNumberWordEach();
+        ConcurrentHashMap<Integer,Integer> mostFrequentWord = DsaUtils.mostFreqWord();
         // Create an instance of WordCountModel
         WordCountModel wordCountModel = new WordCountModel(URL, wordcount, averageWordLength, mostFrequentWord, listNumberWordEach);
         // Check if the fields are correctly initialized

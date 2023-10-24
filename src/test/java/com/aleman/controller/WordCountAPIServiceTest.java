@@ -3,6 +3,7 @@ package com.aleman.controller;
 import com.aleman.model.WordCountModel;
 import com.aleman.model.WordModel;
 import com.aleman.service.ReadFileService;
+import com.aleman.util.DsaUtils;
 import com.aleman.util.MostFrequentWord;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,26 +47,13 @@ public class WordCountAPIServiceTest {
     public void testGetAlemanwordcount() throws Exception {
         String url = "test.com";
         double averageWordLengthReturn = 5.2;
-        ConcurrentHashMap<Integer,Integer> listNumberWordEach = new ConcurrentHashMap<>();
-        listNumberWordEach.put(1,1);
-        listNumberWordEach.put(2,2);
-        listNumberWordEach.put(3,2);
+        ConcurrentHashMap<Integer,Integer> listNumberWordEach = DsaUtils.listNumberWordEach();
+        ConcurrentHashMap<String, WordModel> wordModelConcurrentHashMap = DsaUtils.wordModelConcurrentHashMap();
+        ConcurrentHashMap<Integer,Integer> mostFreqWord = DsaUtils.mostFreqWord();
 
-        ConcurrentHashMap<String, WordModel> mockResult = new ConcurrentHashMap<>();
-        mockResult.put("Hello", new WordModel(5,1));
-        mockResult.put("world", new WordModel(5,1));
-        mockResult.put("&", new WordModel(1,1));
-        mockResult.put("good", new WordModel(5,1));
-        mockResult.put("morning", new WordModel(7,1));
-        mockResult.put("The", new WordModel(3,1));
-        mockResult.put("is", new WordModel(2,1));
-        mockResult.put("18/05/2016", new WordModel(10,1));
-
-        ConcurrentHashMap<Integer,Integer> mostFreqWord = new ConcurrentHashMap<>();
-        mostFreqWord.put(2,2);
-        when(readFileService.getReadFile(url)).thenReturn(mockResult);
+        when(readFileService.getReadFile(url)).thenReturn(wordModelConcurrentHashMap);
         when(mostFrequentWord.printMostFrequentWord(listNumberWordEach)).thenReturn(mostFreqWord);
-        when(wordCountModel.getWordcount()).thenReturn(mockResult.size());
+        when(wordCountModel.getWordcount()).thenReturn(wordModelConcurrentHashMap.size());
         when(wordCountModel.getAverageWordLength()).thenReturn(averageWordLengthReturn);
         when(wordCountModel.getMostFrequentWord()).thenReturn(mostFreqWord);
         when(wordCountModel.getListNumberWordEach()).thenReturn(listNumberWordEach);
